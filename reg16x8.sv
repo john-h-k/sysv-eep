@@ -1,4 +1,4 @@
-module regfile # (
+module reg16x8 # (
   parameter ADDR_WIDTH,
   parameter DATA_WIDTH
 )(

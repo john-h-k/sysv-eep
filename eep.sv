@@ -4,56 +4,67 @@ module eep #(
   parameter INSTR_WIDTH = 16,
   localparam REG_ADDR_WIDTH=$clog2(REG_DEPTH)
 )(
-  input logic clk,
-  input logic [REG_WIDTH-1:0] pc,
-  input logic wen1,
-  input logic [REG_ADDR_WIDTH-1:0] ad1,
-  input logic [REG_ADDR_WIDTH-1:0] ad2,
-  input logic [REG_ADDR_WIDTH-1:0] ad3,
-  input logic [REG_WIDTH-1:0] din1,
-  output logic [REG_WIDTH-1:0] dout2,
-  output logic [REG_WIDTH-1:0] dout3
+  input logic clk
 );
 
-typedef logic [REG_WIDTH-1:0] register;
-typedef logic [INSTR_WIDTH-1:0] instr;
+localparam c1 = 1;
+localparam c2 = 1;
 
-logic dram_we;
+localparam cpen = 1;
+localparam dpen = 1;
 
-register dram_rd_ad;
-register dram_wt_ad;
+logic flagn, flagz, flagc, flagv, flagcin;
+logic wen;
 
-register dram_in;
-register dram_out;
+logic [REG_WIDTH-1:0] codemem_data, codemem_addr, immext, ra, ins, retadr;
 
-logic code_we;
-instr n_instr;
+logic [REG_WIDTH-1:0] din, dout, addr;
 
-rom # (INSTR_WIDTH, INSTR_WIDTH) code(
-  clk,
-  code_we,
-  pc,
-  n_instr
+datapath # (REG_DEPTH, REG_WIDTH) datapath(
+  .clk(clk),
+  .pcin(retadr),
+  .ins(ins),
+  .flagcin(flagcin),
+  .dpen(dpen),
+  .flagn(flagn),
+  .flagz(flagz),
+  .flagc(flagc),
+  .flagv(flagv),
+  .raout(ra),
+  .memdout(dout),
+  .memaddr(addr),
+  .memdin(din),
+  .memwen(wen),
+  .immext(immext)
 );
 
-dram # (REG_WIDTH, REG_WIDTH) data(
-  clk,
-  dram_we,
-  dram_rd_ad,
-  dram_wt_ad,
-  dram_in,
-  dram_out
+controlpath # (REG_WIDTH) controlpath(
+  .clk(clk),
+  .cpen(cpen),
+  .nd(flagn),
+  .zd(flagz),
+  .cd(flagc),
+  .vd(flagv),
+  .ra(ra),
+  .memdata(codemem_data),
+  .immext(immext),
+  .ins(ins),
+  .retadr(retadr),
+  .memaddr(codemem_addr),
+  .flagc(flagcin)
 );
 
-regfile # (REG_ADDR_WIDTH, REG_WIDTH) regfile(
-  clk,
-  wen1,
-  ad1,
-  ad2,
-  ad3,
-  din1,
-  dout2,
-  dout3
+async_rom # (INSTR_WIDTH, INSTR_WIDTH) codemem(
+  .addr(codemem_addr),
+  .dout(codemem_data)
+);
+
+
+async_ram # (REG_WIDTH, REG_WIDTH) datamem(
+  .wen(wen),
+  .din(din),
+  .dout(dout),
+  .addr(addr)
 );
 
 endmodule

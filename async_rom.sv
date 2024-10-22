@@ -1,13 +1,11 @@
-module rom #(
+module async_rom #(
     parameter ADDR_WIDTH, 
     parameter DATA_WIDTH, 
     parameter FILE="",
     localparam DEPTH=2**ADDR_WIDTH - 1
     ) (
-    input wire logic clk,
-    input wire logic we,
-    input wire logic [ADDR_WIDTH-1:0] addr_read,
-    output     logic [DATA_WIDTH-1:0] data_out
+    input wire logic [ADDR_WIDTH-1:0] addr,
+    output     logic [DATA_WIDTH-1:0] dout
     );
 
     logic [DATA_WIDTH-1:0] mem [DEPTH];
@@ -19,7 +17,7 @@ module rom #(
         end
     end
 
-    always_ff @(posedge clk) begin
-        data_out <= mem[addr_read];
+    always_comb begin
+        dout = mem[addr];
     end
 endmodule
