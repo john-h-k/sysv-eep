@@ -5,51 +5,137 @@ $timescale 1ps $end
    $var wire 32 y REG_DEPTH [31:0] $end
    $var wire 32 z REG_WIDTH [31:0] $end
    $var wire 32 z INSTR_WIDTH [31:0] $end
-   $var wire 1 d clk $end
-   $var wire 16 # registers[0] [15:0] $end
-   $var wire 16 $ registers[1] [15:0] $end
-   $var wire 16 % registers[2] [15:0] $end
-   $var wire 16 & registers[3] [15:0] $end
-   $var wire 16 ' registers[4] [15:0] $end
-   $var wire 16 ( registers[5] [15:0] $end
-   $var wire 16 ) registers[6] [15:0] $end
-   $var wire 16 * registers[7] [15:0] $end
+   $var wire 1 p clk $end
+   $var wire 16 W registers[0] [15:0] $end
+   $var wire 16 X registers[1] [15:0] $end
+   $var wire 16 Y registers[2] [15:0] $end
+   $var wire 16 Z registers[3] [15:0] $end
+   $var wire 16 [ registers[4] [15:0] $end
+   $var wire 16 \ registers[5] [15:0] $end
+   $var wire 16 ] registers[6] [15:0] $end
+   $var wire 16 ^ registers[7] [15:0] $end
    $var wire 32 { cpen [31:0] $end
    $var wire 32 { dpen [31:0] $end
-   $var wire 1 J flagn $end
-   $var wire 1 K flagz $end
-   $var wire 1 m flagc $end
-   $var wire 1 L flagv $end
-   $var wire 1 [ flagcin $end
-   $var wire 1 + wen $end
-   $var wire 16 , codemem_data [15:0] $end
-   $var wire 16 \ codemem_addr [15:0] $end
-   $var wire 16 - immext [15:0] $end
-   $var wire 16 M ra [15:0] $end
-   $var wire 16 , ins [15:0] $end
-   $var wire 16 ] retadr [15:0] $end
-   $var wire 16 M din [15:0] $end
-   $var wire 16 N dout [15:0] $end
-   $var wire 16 O addr [15:0] $end
+   $var wire 1 # flagn $end
+   $var wire 1 $ flagz $end
+   $var wire 1 % flagc $end
+   $var wire 1 & flagv $end
+   $var wire 1 _ flagcin $end
+   $var wire 1 ' wen $end
+   $var wire 16 ( codemem_data [15:0] $end
+   $var wire 16 ` codemem_addr [15:0] $end
+   $var wire 16 ) immext [15:0] $end
+   $var wire 16 * ra [15:0] $end
+   $var wire 16 ( ins [15:0] $end
+   $var wire 16 a retadr [15:0] $end
+   $var wire 16 * din [15:0] $end
+   $var wire 16 + dout [15:0] $end
+   $var wire 16 , addr [15:0] $end
+   $scope module codemem $end
+    $var wire 32 z ADDR_WIDTH [31:0] $end
+    $var wire 32 z DATA_WIDTH [31:0] $end
+    $var wire 64 "! FILE [63:0] $end
+    $var wire 32 ~ DEPTH [31:0] $end
+    $var wire 16 ` addr [15:0] $end
+    $var wire 16 ( dout [15:0] $end
+   $upscope $end
+   $scope module controlpath $end
+    $var wire 32 z REG_WIDTH [31:0] $end
+    $var wire 1 p clk $end
+    $var wire 1 | cpen $end
+    $var wire 1 # nd $end
+    $var wire 1 $ zd $end
+    $var wire 1 % cd $end
+    $var wire 1 & vd $end
+    $var wire 16 * ra [15:0] $end
+    $var wire 16 ( memdata [15:0] $end
+    $var wire 16 ) immext [15:0] $end
+    $var wire 16 ( ins [15:0] $end
+    $var wire 16 a retadr [15:0] $end
+    $var wire 16 ` memaddr [15:0] $end
+    $var wire 1 _ flagc $end
+    $var wire 16 ` pc [15:0] $end
+    $var wire 16 - pcnext [15:0] $end
+    $var wire 4 . jmpcond [3:0] $end
+    $var wire 1 / jmp $end
+    $var wire 16 ) offset [15:0] $end
+    $var wire 1 b ffn $end
+    $var wire 1 c ffz $end
+    $var wire 1 _ ffc $end
+    $var wire 1 d ffv $end
+    $var wire 1 0 cven $end
+    $var wire 1 1 nzen $end
+    $var wire 1 1 ffn_en $end
+    $var wire 1 1 ffz_en $end
+    $var wire 1 0 ffc_en $end
+    $var wire 1 0 ffv_en $end
+    $scope module controldecode $end
+     $var wire 32 z REG_WIDTH [31:0] $end
+     $var wire 16 ) immext [15:0] $end
+     $var wire 16 ( ins [15:0] $end
+     $var wire 1 1 nzen $end
+     $var wire 1 0 cven $end
+     $var wire 4 . jmpcond [3:0] $end
+     $var wire 1 / jmp $end
+     $var wire 16 ) joffset [15:0] $end
+    $upscope $end
+    $scope module next $end
+     $var wire 32 z REG_WIDTH [31:0] $end
+     $var wire 1 b flagn $end
+     $var wire 1 c flagz $end
+     $var wire 1 _ flagc $end
+     $var wire 1 d flagv $end
+     $var wire 4 . jmpcond [3:0] $end
+     $var wire 1 / jmp $end
+     $var wire 16 ) offset [15:0] $end
+     $var wire 16 * ra [15:0] $end
+     $var wire 16 ` pc [15:0] $end
+     $var wire 16 - pcnext [15:0] $end
+     $var wire 1 2 cond_jmp $end
+     $var wire 1 3 cond_ret $end
+     $var wire 16 4 add [15:0] $end
+     $scope module cond $end
+      $var wire 1 b flagn $end
+      $var wire 1 c flagz $end
+      $var wire 1 _ flagc $end
+      $var wire 1 d flagv $end
+      $var wire 4 . jmpcond [3:0] $end
+      $var wire 1 2 jump $end
+      $var wire 1 3 ret $end
+      $var wire 1 5 out $end
+      $var wire 1 e not_n_xor_v $end
+     $upscope $end
+    $upscope $end
+   $upscope $end
+   $scope module datamem $end
+    $var wire 32 z ADDR_WIDTH [31:0] $end
+    $var wire 32 z DATA_WIDTH [31:0] $end
+    $var wire 8 } FILE [7:0] $end
+    $var wire 32 ~ DEPTH [31:0] $end
+    $var wire 1 ' wen $end
+    $var wire 16 , addr [15:0] $end
+    $var wire 16 * din [15:0] $end
+    $var wire 16 + dout [15:0] $end
+   $upscope $end
    $scope module datapath $end
     $var wire 32 y REG_DEPTH [31:0] $end
     $var wire 32 z REG_WIDTH [31:0] $end
     $var wire 32 !! REG_ADDR_WIDTH [31:0] $end
-    $var wire 1 d clk $end
-    $var wire 16 ] pcin [15:0] $end
-    $var wire 16 , ins [15:0] $end
-    $var wire 1 [ flagcin $end
+    $var wire 1 p clk $end
+    $var wire 16 a pcin [15:0] $end
+    $var wire 16 ( ins [15:0] $end
+    $var wire 1 _ flagcin $end
     $var wire 1 | dpen $end
-    $var wire 16 N memdout [15:0] $end
-    $var wire 1 J flagn $end
-    $var wire 1 K flagz $end
-    $var wire 1 m flagc $end
-    $var wire 1 L flagv $end
-    $var wire 16 - immext [15:0] $end
-    $var wire 16 M raout [15:0] $end
-    $var wire 16 O memaddr [15:0] $end
-    $var wire 16 M memdin [15:0] $end
-    $var wire 1 + memwen $end
+    $var wire 16 + memdout [15:0] $end
+    $var wire 1 # flagn $end
+    $var wire 1 $ flagz $end
+    $var wire 1 % flagc $end
+    $var wire 1 & flagv $end
+    $var wire 16 ) immext [15:0] $end
+    $var wire 16 * raout [15:0] $end
+    $var wire 16 , memaddr [15:0] $end
+    $var wire 16 * memdin [15:0] $end
+    $var wire 1 ' memwen $end
     $var wire 3 6 a [2:0] $end
     $var wire 3 7 b [2:0] $end
     $var wire 3 8 c [2:0] $end
@@ -62,90 +148,70 @@ $timescale 1ps $end
     $var wire 1 ? pcwrite $end
     $var wire 1 @ ext $end
     $var wire 1 A memldr $end
-    $var wire 1 + memstr $end
+    $var wire 1 ' memstr $end
     $var wire 16 B imms8 [15:0] $end
     $var wire 16 C imms5 [15:0] $end
     $var wire 1 > wen1 $end
     $var wire 3 D ad1 [2:0] $end
-    $var wire 16 M ra [15:0] $end
-    $var wire 16 P rb [15:0] $end
-    $var wire 16 o memdout_mux [15:0] $end
-    $var wire 16 p din1 [15:0] $end
-    $scope module regfile $end
-     $var wire 32 !! ADDR_WIDTH [31:0] $end
-     $var wire 32 z DATA_WIDTH [31:0] $end
-     $var wire 1 d clk $end
-     $var wire 1 > wen1 $end
-     $var wire 3 D ad1 [2:0] $end
-     $var wire 3 6 ad2 [2:0] $end
-     $var wire 3 7 ad3 [2:0] $end
-     $var wire 16 p din1 [15:0] $end
-     $var wire 16 M dout2 [15:0] $end
-     $var wire 16 P dout3 [15:0] $end
-     $var wire 16 q registers[0] [15:0] $end
-     $var wire 16 r registers[1] [15:0] $end
-     $var wire 16 s registers[2] [15:0] $end
-     $var wire 16 t registers[3] [15:0] $end
-     $var wire 16 u registers[4] [15:0] $end
-     $var wire 16 v registers[5] [15:0] $end
-     $var wire 16 w registers[6] [15:0] $end
-     $var wire 16 x registers[7] [15:0] $end
-    $upscope $end
-    $var wire 16 Q nz_data [15:0] $end
-    $var wire 16 R alu_out [15:0] $end
+    $var wire 16 * ra [15:0] $end
+    $var wire 16 E rb [15:0] $end
+    $var wire 16 F memdout_mux [15:0] $end
+    $var wire 16 G din1 [15:0] $end
+    $var wire 16 H nz_data [15:0] $end
+    $var wire 16 I alu_out [15:0] $end
     $scope module alu $end
      $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 1 d clk $end
-     $var wire 16 M ra [15:0] $end
-     $var wire 16 P rb [15:0] $end
-     $var wire 1 [ flagcin $end
+     $var wire 1 p clk $end
+     $var wire 16 * ra [15:0] $end
+     $var wire 16 E rb [15:0] $end
+     $var wire 1 _ flagcin $end
      $var wire 3 9 aluopc [2:0] $end
      $var wire 2 ; shiftopc [1:0] $end
      $var wire 4 : scnt [3:0] $end
      $var wire 1 < op2sel $end
-     $var wire 16 - imm [15:0] $end
-     $var wire 1 m flagc $end
-     $var wire 1 L flagv $end
-     $var wire 16 R out [15:0] $end
-     $var wire 16 S inb [15:0] $end
-     $var wire 1 E invert $end
-     $var wire 1 F addsubcin $end
-     $var wire 16 T and_out [15:0] $end
-     $var wire 1 U addsub_cout $end
-     $var wire 16 V addsub_out [15:0] $end
-     $var wire 1 W shift_cout $end
-     $var wire 16 X shift_out [15:0] $end
+     $var wire 16 ) imm [15:0] $end
+     $var wire 1 % flagc $end
+     $var wire 1 & flagv $end
+     $var wire 16 I out [15:0] $end
+     $var wire 16 J inb [15:0] $end
+     $var wire 1 K invert $end
+     $var wire 1 L addsubcin $end
+     $var wire 16 M and_out [15:0] $end
+     $var wire 1 N addsub_cout $end
+     $var wire 16 O addsub_out [15:0] $end
+     $var wire 1 P shift_cout $end
+     $var wire 16 Q shift_out [15:0] $end
      $scope module addsub $end
       $var wire 32 z REG_WIDTH [31:0] $end
-      $var wire 16 S inb [15:0] $end
-      $var wire 16 M ina [15:0] $end
-      $var wire 1 E invert $end
-      $var wire 1 F carryin $end
-      $var wire 1 L flagv $end
-      $var wire 1 U carryout $end
-      $var wire 16 V out [15:0] $end
-      $var wire 16 Y inb_with_invert [15:0] $end
-      $var wire 17 Z sum [16:0] $end
+      $var wire 16 J inb [15:0] $end
+      $var wire 16 * ina [15:0] $end
+      $var wire 1 K invert $end
+      $var wire 1 L carryin $end
+      $var wire 1 & flagv $end
+      $var wire 1 N carryout $end
+      $var wire 16 O out [15:0] $end
+      $var wire 16 R inb_with_invert [15:0] $end
+      $var wire 17 S sum [16:0] $end
      $upscope $end
      $scope module aludecode $end
-      $var wire 1 [ flagcin $end
+      $var wire 1 _ flagcin $end
       $var wire 3 9 aluopc [2:0] $end
-      $var wire 1 E addsubcin $end
-      $var wire 1 F invert $end
+      $var wire 1 K addsubcin $end
+      $var wire 1 L invert $end
      $upscope $end
      $scope module shift $end
       $var wire 32 z REG_WIDTH [31:0] $end
-      $var wire 16 P in [15:0] $end
-      $var wire 1 [ sftin $end
+      $var wire 16 E in [15:0] $end
+      $var wire 1 _ sftin $end
       $var wire 4 : scnt [3:0] $end
       $var wire 2 ; shiftopc [1:0] $end
-      $var wire 1 W sftout $end
-      $var wire 16 X out [15:0] $end
+      $var wire 1 P sftout $end
+      $var wire 16 Q out [15:0] $end
      $upscope $end
     $upscope $end
     $scope module decode $end
      $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 16 , ins [15:0] $end
+     $var wire 16 ( ins [15:0] $end
      $var wire 1 < op2sel $end
      $var wire 1 = ad1selc $end
      $var wire 1 > wen1 $end
@@ -160,139 +226,73 @@ $timescale 1ps $end
      $var wire 16 B imms8 [15:0] $end
      $var wire 16 C imms5 [15:0] $end
      $var wire 1 A memldr $end
-     $var wire 1 + memstr $end
-     $var wire 1 G alu_ins $end
-     $var wire 1 H shift_ins $end
-     $var wire 1 I cmp_ins $end
+     $var wire 1 ' memstr $end
+     $var wire 1 T alu_ins $end
+     $var wire 1 U shift_ins $end
+     $var wire 1 V cmp_ins $end
     $upscope $end
     $scope module extend $end
      $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 1 d clk $end
+     $var wire 1 p clk $end
      $var wire 16 B data [15:0] $end
      $var wire 1 @ ext $end
-     $var wire 16 - immext [15:0] $end
-     $var wire 8 b reg1 [7:0] $end
-     $var wire 1 c ff1 $end
+     $var wire 16 ) immext [15:0] $end
+     $var wire 8 f reg1 [7:0] $end
+     $var wire 1 g ff1 $end
     $upscope $end
     $scope module nzgen $end
      $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 16 Q data [15:0] $end
-     $var wire 1 J flagn $end
-     $var wire 1 K flagz $end
+     $var wire 16 H data [15:0] $end
+     $var wire 1 # flagn $end
+     $var wire 1 $ flagz $end
     $upscope $end
-   $upscope $end
-   $scope module codemem $end
-    $var wire 32 z ADDR_WIDTH [31:0] $end
-    $var wire 32 z DATA_WIDTH [31:0] $end
-    $var wire 56 "! FILE [55:0] $end
-    $var wire 32 ~ DEPTH [31:0] $end
-    $var wire 16 \ addr [15:0] $end
-    $var wire 16 , dout [15:0] $end
-   $upscope $end
-   $scope module controlpath $end
-    $var wire 32 z REG_WIDTH [31:0] $end
-    $var wire 1 d clk $end
-    $var wire 1 | cpen $end
-    $var wire 1 J nd $end
-    $var wire 1 K zd $end
-    $var wire 1 m cd $end
-    $var wire 1 L vd $end
-    $var wire 16 M ra [15:0] $end
-    $var wire 16 , memdata [15:0] $end
-    $var wire 16 - immext [15:0] $end
-    $var wire 16 , ins [15:0] $end
-    $var wire 16 ] retadr [15:0] $end
-    $var wire 16 \ memaddr [15:0] $end
-    $var wire 1 [ flagc $end
-    $var wire 16 \ pc [15:0] $end
-    $var wire 16 n pcnext [15:0] $end
-    $var wire 4 . jmpcond [3:0] $end
-    $var wire 1 / jmp $end
-    $var wire 16 - offset [15:0] $end
-    $var wire 1 ^ ffn $end
-    $var wire 1 _ ffz $end
-    $var wire 1 [ ffc $end
-    $var wire 1 ` ffv $end
-    $var wire 1 0 cven $end
-    $var wire 1 1 nzen $end
-    $var wire 1 1 ffn_en $end
-    $var wire 1 1 ffz_en $end
-    $var wire 1 0 ffc_en $end
-    $var wire 1 0 ffv_en $end
-    $scope module controldecode $end
-     $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 16 - immext [15:0] $end
-     $var wire 16 , ins [15:0] $end
-     $var wire 1 1 nzen $end
-     $var wire 1 0 cven $end
-     $var wire 4 . jmpcond [3:0] $end
-     $var wire 1 / jmp $end
-     $var wire 16 - joffset [15:0] $end
+    $scope module regfile $end
+     $var wire 32 !! ADDR_WIDTH [31:0] $end
+     $var wire 32 z DATA_WIDTH [31:0] $end
+     $var wire 1 p clk $end
+     $var wire 1 > wen1 $end
+     $var wire 3 D ad1 [2:0] $end
+     $var wire 3 6 ad2 [2:0] $end
+     $var wire 3 7 ad3 [2:0] $end
+     $var wire 16 G din1 [15:0] $end
+     $var wire 16 * dout2 [15:0] $end
+     $var wire 16 E dout3 [15:0] $end
+     $var wire 16 h registers[0] [15:0] $end
+     $var wire 16 i registers[1] [15:0] $end
+     $var wire 16 j registers[2] [15:0] $end
+     $var wire 16 k registers[3] [15:0] $end
+     $var wire 16 l registers[4] [15:0] $end
+     $var wire 16 m registers[5] [15:0] $end
+     $var wire 16 n registers[6] [15:0] $end
+     $var wire 16 o registers[7] [15:0] $end
     $upscope $end
-    $scope module next $end
-     $var wire 32 z REG_WIDTH [31:0] $end
-     $var wire 1 ^ flagn $end
-     $var wire 1 _ flagz $end
-     $var wire 1 [ flagc $end
-     $var wire 1 ` flagv $end
-     $var wire 4 . jmpcond [3:0] $end
-     $var wire 1 / jmp $end
-     $var wire 16 - offset [15:0] $end
-     $var wire 16 M ra [15:0] $end
-     $var wire 16 \ pc [15:0] $end
-     $var wire 16 n pcnext [15:0] $end
-     $var wire 1 2 cond_jmp $end
-     $var wire 1 3 cond_ret $end
-     $var wire 16 4 add [15:0] $end
-     $scope module cond $end
-      $var wire 1 ^ flagn $end
-      $var wire 1 _ flagz $end
-      $var wire 1 [ flagc $end
-      $var wire 1 ` flagv $end
-      $var wire 4 . jmpcond [3:0] $end
-      $var wire 1 2 jump $end
-      $var wire 1 3 ret $end
-      $var wire 1 5 out $end
-      $var wire 1 a not_n_xor_v $end
-     $upscope $end
-    $upscope $end
-   $upscope $end
-   $scope module datamem $end
-    $var wire 32 z ADDR_WIDTH [31:0] $end
-    $var wire 32 z DATA_WIDTH [31:0] $end
-    $var wire 8 } FILE [7:0] $end
-    $var wire 32 ~ DEPTH [31:0] $end
-    $var wire 1 + wen $end
-    $var wire 16 O addr [15:0] $end
-    $var wire 16 M din [15:0] $end
-    $var wire 16 N dout [15:0] $end
    $upscope $end
   $upscope $end
-  $var wire 1 d clk $end
-  $var wire 16 e registers[0] [15:0] $end
-  $var wire 16 f registers[1] [15:0] $end
-  $var wire 16 g registers[2] [15:0] $end
-  $var wire 16 h registers[3] [15:0] $end
-  $var wire 16 i registers[4] [15:0] $end
-  $var wire 16 j registers[5] [15:0] $end
-  $var wire 16 k registers[6] [15:0] $end
-  $var wire 16 l registers[7] [15:0] $end
+  $var wire 1 p clk $end
+  $var wire 16 q registers[0] [15:0] $end
+  $var wire 16 r registers[1] [15:0] $end
+  $var wire 16 s registers[2] [15:0] $end
+  $var wire 16 t registers[3] [15:0] $end
+  $var wire 16 u registers[4] [15:0] $end
+  $var wire 16 v registers[5] [15:0] $end
+  $var wire 16 w registers[6] [15:0] $end
+  $var wire 16 x registers[7] [15:0] $end
  $upscope $end
 $enddefinitions $end
 
 
 #0
-b0000000000000000 #
-b0000000000000000 $
-b0000000000000000 %
-b0000000000000000 &
-b0000000000000000 '
+0#
+1$
+0%
+0&
+0'
 b0000000000000000 (
 b0000000000000000 )
 b0000000000000000 *
-0+
+b0000000000000000 +
 b0000000000000000 ,
-b0000000000000000 -
+b0000000000000001 -
 b0000 .
 0/
 00
@@ -308,7 +308,7 @@ b000 9
 b0000 :
 b00 ;
 0<
-1=
+0=
 1>
 0?
 0@
@@ -316,50 +316,50 @@ b00 ;
 b0000000000000000 B
 b0000000000000000 C
 b000 D
-0E
-0F
-0G
-0H
-0I
-0J
-1K
+b0000000000000000 E
+b0000000000000000 F
+b0000000000000000 G
+b0000000000000000 H
+b0000000000000000 I
+b0000000000000000 J
+0K
 0L
 b0000000000000000 M
-b0000000000000000 N
+0N
 b0000000000000000 O
-b0000000000000000 P
+0P
 b0000000000000000 Q
 b0000000000000000 R
-b0000000000000000 S
-b0000000000000000 T
+b00000000000000000 S
+0T
 0U
-b0000000000000000 V
-0W
+0V
+b0000000000000000 W
 b0000000000000000 X
 b0000000000000000 Y
-b00000000000000000 Z
-0[
+b0000000000000000 Z
+b0000000000000000 [
 b0000000000000000 \
-b0000000000000001 ]
-0^
+b0000000000000000 ]
+b0000000000000000 ^
 0_
-0`
-1a
-b00000000 b
+b0000000000000000 `
+b0000000000000001 a
+0b
 0c
 0d
-b0000000000000000 e
-b0000000000000000 f
-b0000000000000000 g
+1e
+b00000000 f
+0g
 b0000000000000000 h
 b0000000000000000 i
 b0000000000000000 j
 b0000000000000000 k
 b0000000000000000 l
-0m
-b0000000000000001 n
+b0000000000000000 m
+b0000000000000000 n
 b0000000000000000 o
-b0000000000000000 p
+0p
 b0000000000000000 q
 b0000000000000000 r
 b0000000000000000 s
@@ -375,130 +375,208 @@ b00000000000000000000000000000001 {
 b00000000 }
 b00000000000000001111111111111111 ~
 b00000000000000000000000000000011 !!
-b01101101011011110111011000101110011100100110000101101101 "!
+b0110110101101101011011110111011000101110011100100110000101101101 "!
 #1
-b0000001100000111 ,
-b0000000000000111 -
-b0011 .
-12
-b001 6
-b001 8
-b0111 :
+b0000101100000011 (
+b0000000000000011 )
+b0000000000000011 ,
+b1011 .
+15
+b101 6
+b0011 :
 b10 ;
 1<
-b0000000000000111 B
-b0000000000000111 C
-b001 D
-b0000000000000111 O
-b0000000000000111 R
-b0000000000000111 S
-b0000000000000111 V
-b0000000000000111 Y
-b00000000000000111 Z
-1d
-b0000000000000111 o
-b0000000000000111 p
+b0000000000000011 B
+b0000000000000011 C
+b101 D
+b0000000000000011 F
+b0000000000000011 G
+b0000000000000011 I
+b0000000000000011 J
+b0000000000000011 O
+b0000000000000011 R
+b00000000000000011 S
+1p
 #2
-b0000000000000111 $
-b0000000000000111 M
-b0000000000000111 T
-b0000000000001110 V
-b00000000000001110 Z
-0d
-b0000000000000111 f
-b0000000000000111 r
+0p
 #3
-b0000000000000000 ,
-b0000000000000000 -
-b0000 .
+b0000110010100000 (
+b1111111110100000 )
+b0000000000000010 -
+b1100 .
 b0000000000000010 4
-15
-b000 6
-b000 8
+05
+b110 6
+b101 7
 b0000 :
 b00 ;
 0<
+b1111111110100000 B
+b0000000000000000 C
+b110 D
+b0000000000000011 E
+b0000000000000011 Q
+b0000000000000011 \
+b0000000000000001 `
+b0000000000000010 a
+1c
+b00000011 f
+b0000000000000011 m
+1p
+b0000000000000011 v
+#4
+0p
+#5
+b0001110100000100 (
+b0000000000000100 )
+b0000000000000011 *
+b0000000000000100 ,
+b0000000000000011 -
+b1101 .
+10
+12
+b0000000000000011 4
+b000 7
+b001 8
+b001 9
+b0100 :
+b10 ;
+1<
+b0000000000000100 B
+b0000000000000100 C
+b0000000000000000 E
+b0000000000000111 F
+b0000000000000111 G
+b0000000000000111 I
+b0000000000000100 J
+b0000000000000111 O
+b0000000000000000 Q
+b0000000000000100 R
+b00000000000000111 S
+1T
+b0000000000000011 ]
+b0000000000000010 `
+b0000000000000011 a
+b10100000 f
+b0000000000000011 n
+1p
+b0000000000000011 w
+#6
+0p
+#7
+b0001110010111100 (
+b1111111110111100 )
+b0000000000000111 *
+b1111111111111111 ,
+b0000000000000100 -
+b1100 .
+02
+b0000000000000100 4
+b101 7
+b111 8
+b1100 :
+b01 ;
+0<
+1=
+b1111111110111100 B
+b1111111111111100 C
+b111 D
+b0000000000000011 E
+b0000000000001010 F
+b0000000000001010 G
+b0000000000001010 I
+b0000000000000011 J
+b0000000000000011 M
+b0000000000001010 O
+1P
+b0000000000000011 R
+b00000000000001010 S
+b0000000000000111 ]
+b0000000000000011 `
+b0000000000000100 a
+b00000100 f
+b0000000000000111 n
+1p
+b0000000000000111 w
+#8
+0p
+#9
+b0000000000000000 (
+b0000000000000000 )
+b0000000000000000 *
+b0000000000000000 ,
+b0000000000000101 -
+b0000 .
+00
+12
+b0000000000000101 4
+15
+b000 6
+b000 7
+b000 8
+b000 9
+b0000 :
+b00 ;
+0=
 b0000000000000000 B
 b0000000000000000 C
 b000 D
+b0000000000000000 E
+b0000000000000000 F
+b0000000000000000 G
+b0000000000000000 I
+b0000000000000000 J
 b0000000000000000 M
 b0000000000000000 O
+0P
 b0000000000000000 R
-b0000000000000000 S
-b0000000000000000 T
-b0000000000000000 V
-b0000000000000000 Y
-b00000000000000000 Z
-b0000000000000001 \
-b0000000000000010 ]
-1_
-b00000111 b
-1d
-b0000000000000010 n
-b0000000000000000 o
-b0000000000000000 p
-#4
-0d
-#5
-b0000000000000011 4
-b0000000000000010 \
-b0000000000000011 ]
-b00000000 b
-1d
-b0000000000000011 n
-#6
-0d
-#7
-b0000000000000100 4
-b0000000000000011 \
-b0000000000000100 ]
-1d
-b0000000000000100 n
-#8
-0d
-#9
-b0000000000000101 4
-b0000000000000100 \
-b0000000000000101 ]
-1d
-b0000000000000101 n
+b00000000000000000 S
+0T
+b0000000000001010 ^
+b0000000000000100 `
+b0000000000000101 a
+b10111100 f
+b0000000000001010 o
+1p
+b0000000000001010 x
 #10
-0d
+0p
 #11
+b0000000000000110 -
 b0000000000000110 4
-b0000000000000101 \
-b0000000000000110 ]
-1d
-b0000000000000110 n
+b0000000000000101 `
+b0000000000000110 a
+b00000000 f
+1p
 #12
-0d
+0p
 #13
+b0000000000000111 -
 b0000000000000111 4
-b0000000000000110 \
-b0000000000000111 ]
-1d
-b0000000000000111 n
+b0000000000000110 `
+b0000000000000111 a
+1p
 #14
-0d
+0p
 #15
+b0000000000001000 -
 b0000000000001000 4
-b0000000000000111 \
-b0000000000001000 ]
-1d
-b0000000000001000 n
+b0000000000000111 `
+b0000000000001000 a
+1p
 #16
-0d
+0p
 #17
+b0000000000001001 -
 b0000000000001001 4
-b0000000000001000 \
-b0000000000001001 ]
-1d
-b0000000000001001 n
+b0000000000001000 `
+b0000000000001001 a
+1p
 #18
-0d
+0p
 #19
+b0000000000001010 -
 b0000000000001010 4
-b0000000000001001 \
-b0000000000001010 ]
-1d
-b0000000000001010 n
+b0000000000001001 `
+b0000000000001010 a
+1p

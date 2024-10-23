@@ -12,15 +12,16 @@ module reg16x8 # (
   output logic [DATA_WIDTH-1:0] dout3
 );
 
-logic [DATA_WIDTH-1:0] registers [2**ADDR_WIDTH-1:0] /* verilator public */;
+logic [DATA_WIDTH-1:0] registers [2**ADDR_WIDTH-1:0] = '{default:'0};
 
 always_comb begin
   dout2 = registers[ad2];
   dout3 = registers[ad3];
 end
 
-always @(negedge clk) begin
-if(wen1)
-        registers[ad1] <= din1;
+always_ff @(posedge clk) begin
+  if(wen1) begin
+    registers[ad1] <= din1;
+  end;
 end
 endmodule

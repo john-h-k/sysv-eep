@@ -1,6 +1,4 @@
 #include "Veep.h"
-#include "Veep_reg16x8__A3_D10.h"
-#include "Veep_async_rom__A10_D10.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include <iostream>
@@ -38,14 +36,14 @@ int main(int argc, char **argv, char **env) {
 
     // dump variables into VCD file and tog
     for (clk = 0; clk < 2; clk++) {
+      for (size_t i = 0; i < 8; i++) {
+        std::cout << "Register " << i << ": " << top->registers[i] << std::endl;
+      }
+
       tfp->dump(2 * i + clk);
       // unit is
       top->clk = !top->clk;
       top->eval();
-
-      for (size_t i = 0; i < 15; i++) {
-        std::cout << "Register " << i << ": " << top->registers[i] << std::endl;
-      }
     }
 
     #ifdef VBD

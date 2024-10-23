@@ -1,7 +1,7 @@
 module async_rom #(
     parameter ADDR_WIDTH, 
     parameter DATA_WIDTH, 
-    parameter FILE="mov.ram",
+    parameter FILE="mmov.ram",
     localparam DEPTH=2**ADDR_WIDTH - 1
     ) (
     input wire logic [ADDR_WIDTH-1:0] addr,

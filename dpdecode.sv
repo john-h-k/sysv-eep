@@ -51,7 +51,7 @@ assign memldr = ins[15:13] == 4;
 assign memstr = ins[15:13] == 5;
 
 assign op2sel = !(shift_ins & !ins[15]) & ins[8];
-assign ad1selc = !(alu_ins & !ins[15]) | ins[8];
+assign ad1selc = !(!(alu_ins & !ins[15]) | ins[8]);
 assign pcwrite = ins[15:8] == 'b11001110;
 assign wen1 = memldr | pcwrite | (!cmp_ins & !ins[15]);
 assign ext = ins[15:8] == 'hD0;
