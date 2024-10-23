@@ -3,7 +3,8 @@ module eep #(
   parameter REG_WIDTH = 16,
   parameter INSTR_WIDTH = 16
 )(
-  input logic clk
+  input logic clk,
+  output logic [REG_WIDTH-1:0] registers [REG_DEPTH-1:0]  
 );
 
 localparam cpen = 1;
@@ -62,5 +63,7 @@ async_ram # (REG_WIDTH, REG_WIDTH) datamem(
   .dout(dout),
   .addr(addr)
 );
+
+assign registers = datapath.regfile.registers;
 
 endmodule

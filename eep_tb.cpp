@@ -34,7 +34,7 @@ int main(int argc, char **argv, char **env) {
   top->clk = 0;
 
   // run simulation for many clock cycles
-  for (i = 0; i < 300; i++) {
+  for (i = 0; i < 10; i++) {
 
     // dump variables into VCD file and tog
     for (clk = 0; clk < 2; clk++) {
@@ -42,12 +42,11 @@ int main(int argc, char **argv, char **env) {
       // unit is
       top->clk = !top->clk;
       top->eval();
-    }
 
-    // int shifts[4] = { 0, 4, 8, 16 };
-    // for (int j = 4; j > 0; j--) {
-    //   vbdHex(i, (int(top->count) >> (shifts[j - 1])) & 0xF);
-    // }
+      for (size_t i = 0; i < 15; i++) {
+        std::cout << "Register " << i << ": " << top->registers[i] << std::endl;
+      }
+    }
 
     #ifdef VBD
     vbdPlot(int(top->dout2), 0, 255);
