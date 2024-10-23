@@ -20,7 +20,7 @@ module datapath #(
   output logic memwen
 );
 
-logic [2:0] a, b, c;
+logic [REG_ADDR_WIDTH-1:0] a, b, c;
 logic [2:0] aluopc;
 logic [3:0] scnt;
 logic [1:0] shiftopc;
@@ -48,10 +48,12 @@ dpdecode # (REG_WIDTH) decode(
    .memstr(memstr)
 );
 
+assign memwen = memstr;
+
 logic wen1;
 assign wen1 = dpen & dp_wen1;
 
-logic ad1;
+logic [REG_ADDR_WIDTH-1:0] ad1;
 assign ad1 = ad1selc ? c : a;
 
 logic [REG_WIDTH-1:0] ra, rb;
@@ -109,5 +111,9 @@ alu # (REG_WIDTH) alu(
   .flagv(flagv),
   .out(alu_out)
 );
+
+assign raout = ra;
+assign memdin = ra;
+assign memaddr = op2sel ? immext : rb + imms5;
 
 endmodule

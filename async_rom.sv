@@ -8,7 +8,7 @@ module async_rom #(
     output     logic [DATA_WIDTH-1:0] dout
     );
 
-    logic [DATA_WIDTH-1:0] mem [DEPTH];
+    logic [DATA_WIDTH-1:0] mem [DEPTH] /* verilator public */;
 
     initial begin
         if (FILE != 0) begin

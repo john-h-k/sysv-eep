@@ -12,7 +12,7 @@ module reg16x8 # (
   output logic [DATA_WIDTH-1:0] dout3
 );
 
-logic [DATA_WIDTH-1:0] registers [2**ADDR_WIDTH-1:0];
+logic [DATA_WIDTH-1:0] registers [2**ADDR_WIDTH-1:0] /* verilator public */;
 
 always_comb begin
   dout2 = registers[ad2];

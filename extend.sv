@@ -16,7 +16,7 @@ end
 
 always_comb begin
   if (ff1)
-    immext = {reg1, data};
+    immext = {reg1, data[7:0]};
   else
     immext = data;
 end

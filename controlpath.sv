@@ -37,6 +37,10 @@ next #(REG_WIDTH) next(
   .pcnext(pcnext)
 );
 
+always_ff @ (posedge clk) begin
+  pc <= pcnext;
+end
+
 logic cven, nzen;
 
 logic ffn_en, ffz_en, ffc_en, ffv_en;

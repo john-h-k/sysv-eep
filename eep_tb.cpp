@@ -1,4 +1,6 @@
 #include "Veep.h"
+#include "Veep_reg16x8__A3_D10.h"
+#include "Veep_async_rom__A10_D10.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include <iostream>
@@ -29,15 +31,10 @@ int main(int argc, char **argv, char **env) {
   #endif
 
   // initialize simulation inputs
-  top->clk = 1;
-  top->wen1 = 1;
-  top->ad1 = 1;
-  top->ad2 = 1;
-  top->ad3 = 1;
-  top->din1 = 0;
+  top->clk = 0;
+
   // run simulation for many clock cycles
   for (i = 0; i < 300; i++) {
-    top->din1 = i;
 
     // dump variables into VCD file and tog
     for (clk = 0; clk < 2; clk++) {
@@ -56,8 +53,6 @@ int main(int argc, char **argv, char **env) {
     vbdPlot(int(top->dout2), 0, 255);
     vbdCycle(i + 1);
     #endif
-
-    std::cout << "Register " << top->ad2 << " = " << top->dout2 << std::endl;
 
     // top->en = (i > 4);
     if (Verilated::gotFinish()) {

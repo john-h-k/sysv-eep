@@ -1,14 +1,10 @@
 module eep #(
   parameter REG_DEPTH = 8,
   parameter REG_WIDTH = 16,
-  parameter INSTR_WIDTH = 16,
-  localparam REG_ADDR_WIDTH=$clog2(REG_DEPTH)
+  parameter INSTR_WIDTH = 16
 )(
   input logic clk
 );
-
-localparam c1 = 1;
-localparam c2 = 1;
 
 localparam cpen = 1;
 localparam dpen = 1;
